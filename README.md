@@ -1,21 +1,49 @@
-# Net Probe — Speed Scanner
+<div align="center">
 
-A monochrome, animated internet speed scanner built with pure HTML, CSS, and JavaScript. No frameworks, no dependencies, no build tools required.
+# 🛰️ Net Probe
+### Speed Scanner
 
-🌐 **Live demo:** [https://itsmrroot.github.io/netprobe/](https://itsmrroot.github.io/netprobe/)
+A monochrome, animated internet speed scanner built with pure HTML, CSS, and JavaScript.
+No frameworks, no dependencies, no build tools required.
+
+![No Dependencies](https://img.shields.io/badge/dependencies-none-000000?style=flat-square)
+![Vanilla JS](https://img.shields.io/badge/javascript-vanilla-000000?style=flat-square)
+![No Build Step](https://img.shields.io/badge/build_step-none-000000?style=flat-square)
+![Made with HTML CSS JS](https://img.shields.io/badge/made_with-HTML%20%C2%B7%20CSS%20%C2%B7%20JS-000000?style=flat-square)
+
+**🌐 [Live Demo](https://itsmrroot.github.io/netprobe/)**
+
+![Net Probe screenshot](screenshot.png)
+
+</div>
 
 ---
 
-## Files
+## Contents
 
-```
-netprobe/
-├── index.html    — Page structure and layout
-├── style.css     — All styling and animations
-├── app.js        — Radar drawing, IP detection, real speed test
-├── favicon.svg   — Tab icon / header mark
-└── README.md     — This file
-```
+- [Features](#features)
+- [How to run](#how-to-run)
+- [How the speed test works](#how-the-speed-test-works)
+- [IP detection](#ip-detection)
+- [Browser support](#browser-support)
+- [Customization](#customization)
+- [Files](#files)
+- [License](#license)
+
+---
+
+## Features
+
+| Feature | Details |
+|---|---|
+| Animated radar sweep | Canvas-based rotating sweep with trailing blips |
+| Live speed counter | Number updates in real time as bytes actually move |
+| Download / Upload / Ping | All three are real measurements, run in sequence |
+| Real public IP detection | Tries 3 APIs in order — `free.freeipapi.com`, `ipwho.is`, `ipify.org` |
+| Public IP, Country | Auto-detected alongside IP |
+| Stop button | Aborts all in-flight network requests immediately |
+| Retry button | Resets and re-runs a fresh scan |
+| Star background | 120 randomly placed twinkling stars |
 
 ---
 
@@ -43,21 +71,6 @@ Then open the URL shown in the terminal.
 
 ---
 
-## Features
-
-| Feature | Details |
-|---|---|
-| Animated radar sweep | Canvas-based rotating sweep with trailing blips |
-| Live speed counter | Number updates in real time as bytes actually move |
-| Download / Upload / Ping | All three are real measurements, run in sequence |
-| Real public IP detection | Tries 3 APIs in order — `free.freeipapi.com`, `ipwho.is`, `ipify.org` |
-| Public IP, Country | Auto-detected alongside IP |
-| Stop button | Aborts all in-flight network requests immediately |
-| Retry button | Resets and re-runs a fresh scan |
-| Star background | 120 randomly placed twinkling stars |
-
----
-
 ## How the speed test works
 
 This is a static, backend-less page, so it measures against Cloudflare's public
@@ -81,7 +94,7 @@ fabricated number.
 
 ---
 
-## IP Detection
+## IP detection
 
 The app tries these APIs in order. If the first one fails, it automatically falls back to the next:
 
@@ -114,6 +127,20 @@ const STREAM_COUNT     = 2;    // parallel connections per phase
 Raising `STREAM_COUNT` can better saturate very fast connections, but the
 public test endpoint may throttle or reject bursts of many simultaneous
 connections — 2 is a reasonably safe default.
+
+---
+
+## Files
+
+```
+netprobe/
+├── index.html    — Page structure and layout
+├── style.css     — All styling and animations
+├── app.js        — Radar drawing, IP detection, real speed test
+├── favicon.svg   — Tab icon / header mark
+├── screenshot.png — Preview image used above
+└── README.md     — This file
+```
 
 ---
 
