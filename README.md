@@ -2,7 +2,7 @@
 
 A monochrome, animated internet speed scanner built with pure HTML, CSS, and JavaScript. No frameworks, no dependencies, no build tools required.
 
-**Live demo:** _TODO — add your GitHub Pages link here after publishing (e.g. `https://<username>.github.io/netprobe/`)_
+**Live demo:** _TODO — add your GitHub Pages link here after publishing (e.g. `https://itsmrroot.github.io/netprobe/`)_
 
 ---
 
