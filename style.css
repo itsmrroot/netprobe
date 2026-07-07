@@ -1,0 +1,422 @@
+/* =========================================================
+   Net Probe — Speed Scanner
+   style.css
+   ========================================================= */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base */
+html {
+  height: 100%;
+}
+
+body {
+  background: #000;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ── Stars background ── */
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle var(--d) ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50%       { opacity: var(--o); }
+}
+
+/* ── Layout container ── */
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 680px;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+}
+
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: #fff;
+  opacity: 0.4;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.header h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #fff;
+}
+
+/* ── Radar ── */
+.radar-wrapper {
+  position: relative;
+  width: clamp(200px, 70vw, 280px);
+  height: clamp(200px, 70vw, 280px);
+}
+
+.radar-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.speed-display {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.speed-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.speed-unit {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 2px;
+  font-weight: 400;
+  margin-top: 6px;
+}
+
+.speed-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 2px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* ── Metric cards ── */
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.metric-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 16px 12px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+.metric-card.active {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.metric-icon {
+  font-size: 16px;
+  margin-bottom: 8px;
+  display: block;
+  opacity: 0.7;
+}
+
+.metric-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: #fff;
+  display: block;
+}
+
+.metric-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 4px;
+  display: block;
+}
+
+.metric-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 2px;
+  display: block;
+}
+
+/* ── IP Panel ── */
+.ip-panel {
+  width: 100%;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.ip-panel-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.ip-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ip-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ip-key {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.ip-val {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #fff;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.ip-val.loading {
+  color: rgba(255, 255, 255, 0.25);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── Status bar ── */
+.status-bar {
+  width: 100%;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.status-dot.active {
+  background: #fff;
+  animation: pulse-dot 1s ease-in-out infinite;
+}
+
+.status-dot.done {
+  background: #fff;
+  animation: none;
+}
+
+.status-dot.stopped {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  animation: none;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.status-text         { font-family: 'Inter', sans-serif; color: rgba(255, 255, 255, 0.4); flex: 1; transition: color 0.3s; }
+.status-text.active  { color: #fff; }
+.status-text.done    { color: #fff; }
+.status-text.stopped { color: rgba(255, 255, 255, 0.6); }
+
+.progress-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.progress-fill.stopped { background: rgba(255, 255, 255, 0.35); }
+
+/* ── Buttons ── */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-btn,
+.stop-btn,
+.retry-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 34px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.scan-btn:hover,
+.stop-btn:hover,
+.retry-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+.scan-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  background: transparent;
+  color: #fff;
+}
+
+.stop-btn,
+.retry-btn {
+  display: none;
+}
+
+.stop-btn.visible,
+.retry-btn.visible {
+  display: block;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .container {
+    padding: 28px 16px;
+    gap: 20px;
+  }
+
+  .header h2 {
+    font-size: 22px;
+  }
+
+  .speed-number {
+    font-size: 36px;
+  }
+
+  .metrics {
+    gap: 8px;
+  }
+
+  .metric-card {
+    padding: 12px 6px;
+  }
+
+  .metric-value {
+    font-size: 16px;
+  }
+
+  .scan-btn,
+  .stop-btn,
+  .retry-btn {
+    flex: 1 1 auto;
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 340px) {
+  .metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .metric-card:last-child {
+    grid-column: span 2;
+  }
+}
