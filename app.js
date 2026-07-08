@@ -114,6 +114,54 @@ function animateSweep() {
   animFrame = requestAnimationFrame(animateSweep);
 }
 
+/* ── Live speed graphs ── */
+const graphDL = { canvas: document.getElementById('graph-dl'), samples: [] };
+const graphUL = { canvas: document.getElementById('graph-ul'), samples: [] };
+[graphDL, graphUL].forEach((g) => { g.ctx = g.canvas.getContext('2d'); });
+
+function drawGraph(g) {
+  const { ctx: gctx, canvas: gcanvas, samples } = g;
+  const w = gcanvas.width, h = gcanvas.height;
+  gctx.clearRect(0, 0, w, h);
+
+  if (samples.length < 2) return;
+
+  const maxT = Math.max(TEST_DURATION_MS, samples[samples.length - 1].t);
+  const maxV = Math.max(...samples.map((s) => s.v), 10) * 1.2;
+  const toX = (t) => (t / maxT) * w;
+  const toY = (v) => h - (v / maxV) * h * 0.9;
+
+  gctx.beginPath();
+  gctx.moveTo(toX(samples[0].t), toY(samples[0].v));
+  samples.forEach((s) => gctx.lineTo(toX(s.t), toY(s.v)));
+  gctx.lineTo(toX(samples[samples.length - 1].t), h);
+  gctx.lineTo(toX(samples[0].t), h);
+  gctx.closePath();
+  gctx.fillStyle = 'rgba(255,255,255,0.08)';
+  gctx.fill();
+
+  gctx.beginPath();
+  gctx.moveTo(toX(samples[0].t), toY(samples[0].v));
+  samples.forEach((s) => gctx.lineTo(toX(s.t), toY(s.v)));
+  gctx.strokeStyle = '#ffffff';
+  gctx.lineWidth = 2;
+  gctx.lineJoin = 'round';
+  gctx.stroke();
+
+  const last = samples[samples.length - 1];
+  gctx.beginPath();
+  gctx.arc(toX(last.t), toY(last.v), 3, 0, Math.PI * 2);
+  gctx.fillStyle = '#ffffff';
+  gctx.fill();
+}
+
+function resetGraphs() {
+  [graphDL, graphUL].forEach((g) => {
+    g.samples = [];
+    g.ctx.clearRect(0, 0, g.canvas.width, g.canvas.height);
+  });
+}
+
 /* ── IP detection ── */
 function setIP(id, value) {
   const el = document.getElementById(id);
@@ -287,6 +335,7 @@ function resetUI() {
   const fill = document.getElementById('progressFill');
   fill.classList.remove('stopped');
   fill.style.width = '0%';
+  resetGraphs();
 }
 
 function showButtons(state) {
@@ -364,6 +413,8 @@ async function startScan() {
       document.getElementById('speedNum').textContent = Math.round(mbps);
       document.getElementById('val-dl').textContent   = Math.round(mbps);
       fill.style.width = (15 + Math.min(elapsedMs / TEST_DURATION_MS, 1) * 45) + '%';
+      graphDL.samples.push({ t: elapsedMs, v: mbps });
+      drawGraph(graphDL);
     }, signal);
     document.getElementById('val-dl').textContent = Math.round(dlSpeed);
 
@@ -376,6 +427,8 @@ async function startScan() {
       document.getElementById('speedNum').textContent = Math.round(mbps);
       document.getElementById('val-ul').textContent   = Math.round(mbps);
       fill.style.width = (60 + Math.min(elapsedMs / TEST_DURATION_MS, 1) * 36) + '%';
+      graphUL.samples.push({ t: elapsedMs, v: mbps });
+      drawGraph(graphUL);
     }, signal);
     document.getElementById('val-ul').textContent = Math.round(ulSpeed);
     fill.style.width = '100%';

@@ -149,6 +149,36 @@ body {
   text-transform: uppercase;
 }
 
+/* ── Live graphs ── */
+.graph-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.graph-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.graph-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.graph-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 300 / 110;
+}
+
 /* ── Metric cards ── */
 .metrics {
   display: grid;

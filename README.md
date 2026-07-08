@@ -38,6 +38,7 @@ No frameworks, no dependencies, no build tools required.
 |---|---|
 | Animated radar sweep | Canvas-based rotating sweep with trailing blips |
 | Live speed counter | Number updates in real time as bytes actually move |
+| Live download/upload graphs | Line chart traces throughput as it's measured, sample by sample |
 | Download / Upload / Ping | All three are real measurements, run in sequence |
 | Real public IP detection | Tries 3 APIs in order — `free.freeipapi.com`, `ipwho.is`, `ipify.org` |
 | Public IP, Country | Auto-detected alongside IP |
