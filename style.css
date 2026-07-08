@@ -173,6 +173,24 @@ body {
   margin-bottom: 8px;
 }
 
+.graph-value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.graph-unit {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 .graph-canvas {
   display: block;
   width: 100%;
@@ -419,6 +437,14 @@ body {
 
   .speed-number {
     font-size: 36px;
+  }
+
+  .graph-card {
+    padding: 10px 12px;
+  }
+
+  .graph-value {
+    font-size: 22px;
   }
 
   .metrics {

@@ -323,7 +323,7 @@ let scanController;
 
 /* ── UI helpers ── */
 function resetUI() {
-  ['val-dl', 'val-ul', 'val-ping'].forEach(function(id) {
+  ['val-dl', 'val-ul', 'val-ping', 'graph-val-dl', 'graph-val-ul'].forEach(function(id) {
     document.getElementById(id).textContent = '--';
   });
   document.getElementById('speedNum').textContent    = '--';
@@ -412,11 +412,13 @@ async function startScan() {
     const dlSpeed = await measureThroughput('download', TEST_DURATION_MS, function(mbps, elapsedMs) {
       document.getElementById('speedNum').textContent = Math.round(mbps);
       document.getElementById('val-dl').textContent   = Math.round(mbps);
+      document.getElementById('graph-val-dl').textContent = Math.round(mbps);
       fill.style.width = (15 + Math.min(elapsedMs / TEST_DURATION_MS, 1) * 45) + '%';
       graphDL.samples.push({ t: elapsedMs, v: mbps });
       drawGraph(graphDL);
     }, signal);
     document.getElementById('val-dl').textContent = Math.round(dlSpeed);
+    document.getElementById('graph-val-dl').textContent = Math.round(dlSpeed);
 
     /* Phase 3 — Upload */
     txt.textContent   = 'Measuring upload speed...';
@@ -426,11 +428,13 @@ async function startScan() {
     const ulSpeed = await measureThroughput('upload', TEST_DURATION_MS, function(mbps, elapsedMs) {
       document.getElementById('speedNum').textContent = Math.round(mbps);
       document.getElementById('val-ul').textContent   = Math.round(mbps);
+      document.getElementById('graph-val-ul').textContent = Math.round(mbps);
       fill.style.width = (60 + Math.min(elapsedMs / TEST_DURATION_MS, 1) * 36) + '%';
       graphUL.samples.push({ t: elapsedMs, v: mbps });
       drawGraph(graphUL);
     }, signal);
     document.getElementById('val-ul').textContent = Math.round(ulSpeed);
+    document.getElementById('graph-val-ul').textContent = Math.round(ulSpeed);
     fill.style.width = '100%';
 
     scanning = false;
